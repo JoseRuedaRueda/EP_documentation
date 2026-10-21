@@ -1,16 +1,22 @@
+
+Welcome to the MEP toolbox documentation. This is a project under development, the ultimate goal is to construct a series of machine independent codes which allow us to deal with our daily activities in the EP research. Currently all the codes are mostly written for DIII-D and stored in DIII-D database, thus, this guide focus heavily on DIII-D cases when explaining how to run the codes.
+
+# Code location in Omega
+
 Energetic Particle Codes are stored on Omega at `/fusion/projects/toolbox/energetic_particles` 
 
 The old wiki can be found in: https://diii-d.gat.com/diii-d/BPphysicsEnergetic. This site, under construction, will contain the detailed current status of these codes
 
 
 > [!WARNING] Don't store your cooked food with your saucepans
-> After you have cook an excellent dish, if you need to save a part of it, you don't store it in the same kitchen cabinet that your saucepans. You use the fridge. Please apply the same criteria here. The EP toolbox is the cabinet in your kitchen where you have your cooking utensils, do not store here your cooked food! Keep your tenso of GB data output and files in your user folder!
+> After you have cook an excellent dish, if you need to save a part of it, you don't store it in the same kitchen cabinet that your saucepans. You use the fridge. Please apply the same criteria here. The EP toolbox is the cabinet in your kitchen where you have your cooking utensils, do not store here your cooked food! Keep your tens of GB data output and files in your user folder!
 
 # Basic code usage
 ## For IDL based codes
 Start by loading the EP module
 ```bash
 module purge
+module load defaults
 module load ep
 ```
 
@@ -19,7 +25,10 @@ All IDL codes in the toolbox are now in your path, so you can open an idl termin
 Some codes require ADAS. If you haven’t been added as an ADAS user, go here and follow the instructions, including signing the ADAS User Agreement and sending it off as directed: https://diii-d.gat.com/diii-d/Adasuser
 
 ## For python codes
-Some python codes requires specific packages, so a common environment can't be created for all EP code. You will find in each module the precise python env you should load for each case
+Some python codes requires specific packages, so a common environment can't be created for all EP code. You will find in each module the precise python env you should load for each case. To load these modules, you need to add the EP modules location to your path, for this, run the following in your terminal (or better, add it to your bash):
+```bash
+module use /fusion/projects/toolbox/energetic_particles/modules
+```
 
 # Basic code development
 All codes in the EP common areas should be under version control in order to make it easier for other people to improve the codes and to track and compare past versions. **Users should not directly edit the production (public) version of the codes in** `/fusion/projects/toolbox/energetic_particles`.  To update codes, users can clone the production version to their own development area, update the code, and then push the updates to the relevant project on the GitHub server. The owners of the project can then update the production version of the codes on Omega.
@@ -51,7 +60,7 @@ chmod g-w –R /fusion/projects/toolbox/energetic_particles/dev/$USER
 ```bash
 cd /fusion/projects/toolbox/energetic_particles/dev/$USER
 git clone <MyCodeLink>
-git checkout <MyCodeBranch>
+git checkout -b <MyCodeBranch>
 git pull
 ```
 - 5: Modify the code as needed
@@ -59,7 +68,7 @@ git pull
 - 7: Add the changes to git: 
 ```bash
 git add <MyFilesChanged>
-git commit -m "<A clear 1 line message explaining what you did"
+git commit -m "<A clear 1 line message explaining what you did>"
 git push
 ```
 - 8: Notify the code owner for him to merge and update the public code
@@ -77,7 +86,6 @@ git push
 - `git remote –v` (display all shortnames and URLs for remote repos) 
 
 # Abandoned folders
+There are some folders which seems abandoned with not known active developers or users. These are:
 - [EP EFIT TOOLS](EP%20EFIT%20TOOLS.md)
 - gacode_add
-
-git config --global --add safe.directory /fusion/projects/toolbox/energetic_particles/ION_ORBITS_TRACK_MV
